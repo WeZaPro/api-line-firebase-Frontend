@@ -32,7 +32,7 @@
 // Line
 async function main() {
 
-await liff.init({ liffId: "1657351076-xoZKjJqe" })
+await liff.init({ liffId: "1657351076-Ay3x6kYV" })
 if (liff.isLoggedIn()) {
   alert("คุณได้ทำการ LogIn แล้ว กรุณาเลือก PACKAGE ที่ต้องการแชร์อีกครั้ง")
 
@@ -40,7 +40,7 @@ if (liff.isLoggedIn()) {
 
 } else {
   alert("กรุณา LogIn ก่อน")
-  liff.login({ redirectUri :`https://www.onlinesabuyme.co.th/Sm_packageShare`})   
+  liff.login({ redirectUri :`https://api-line-firebase-frontend.herokuapp.com/`})   
  
 }
 async function getUserProfile() {
