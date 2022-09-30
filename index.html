@@ -92,7 +92,7 @@ async function postData() {
 const profile = await liff.getProfile() 
 
 const data = { userId: profile.userId,
-  diaplayName: profile.diaplayName,
+  //diaplayName: profile.diaplayName,
   pictureUrl: profile.pictureUrl,
   email: liff.getDecodedIDToken().email};
 
