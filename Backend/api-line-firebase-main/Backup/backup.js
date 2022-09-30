@@ -95,16 +95,13 @@ app.get('/api/get', (req, res) => {
 
 //create
 app.post('/api/create', (req,res) => {
-    var _userId = req.body.userId;
-    var _displayName = req.body.displayName;
+    var fullname = req.body.fullname;
 
     try {
-        console.log('>>>> _userId', _userId)
-        console.log('>>>> _displayName', _displayName)
-        console.log('path', 'users/' + _userId)
-        set(ref(db, 'users/' + _userId), {
-            UserID: _userId,
-            DisplayName: _displayName,
+        console.log('>>>> fullname', fullname)
+        console.log('path', 'users/' + fullname)
+        set(ref(db, 'users/' + fullname), {
+            name: fullname,
             balance: 100,
             mil: new Date().getTime(),
             date: new Date() + ''
