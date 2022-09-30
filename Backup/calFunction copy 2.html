@@ -1,0 +1,99 @@
+<html>
+  <head></head>
+  </body>
+    <button onclick="myFunction()">Click me</button>
+    <button onclick="sendLine()">Send Line</button>
+     <button onclick="sendLineId(`ทดสอบส่งข้อมูล-LocalHost`)">Send Line ID</button>
+     <button onclick="sendLineHeroku()">Send Line Heroku</button>
+     <button onclick="sendLineHerokuParam(`ทดสอบส่งข้อมูล-Hosting`)">sendLineHerokuParam</button>
+
+     <button onclick="getData(`ทดสอบ CALL FUNCTION`)">CALL FUNCTION GET</button>
+     <button onclick="postData(`Laddawan`)">CALL FUNCTION POST</button>
+
+<p id="demo"></p>
+<!-- <script src="javascript.js"></script> -->
+  </body>
+</html>
+
+<script>
+function myFunction() {
+    fetch("http://localhost:9000/text").then(res => {
+        console.log("log");
+        return res.text()
+    }).then(text => {
+        alert(text)
+    })
+};
+
+function sendLine() {
+    fetch("http://localhost:9000/line").then(res => {
+        console.log("log");
+        return res.text()
+    }).then(text => {
+        alert(text)
+    })
+};
+
+function sendLineId(b) {
+    $params = b
+    fetch(`http://localhost:9000/line/`+$params).then(res => {
+        console.log("log" + a);
+        return res.text()
+    }).then(text => {
+        alert(text)
+    })
+};
+
+function sendLineHeroku() {
+    fetch("https://node-line-api.herokuapp.com/line/001").then(res => {
+        console.log("log");
+        return res.text()
+    }).then(text => {
+        alert(text)
+    })
+};
+
+function sendLineHerokuParam(b) {
+    $params = b
+    fetch(`https://node-line-api.herokuapp.com/line/`+$params).then(res => {
+        console.log("log"+$params);
+        return res.text()
+    }).then(text => {
+        alert(text)
+    })
+};
+
+// Get data
+function getData() {
+
+    fetch('https://api-line-firebase.herokuapp.com/api/get/')
+            .then((response) => response.json())
+            .then((data) => console.log(data));
+};
+
+// Post data
+function postData(x) {
+
+    const data = { fullname: x };
+
+fetch('https://api-line-firebase.herokuapp.com/api/create', {
+  method: 'POST', // or 'PUT'
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify(data),
+})
+  .then((response) => response.json())
+  .then((data) => { console.log('Success:', data);})
+  .catch((error) => {
+   console.error('Error:', error);
+});
+  
+
+
+};
+
+
+
+
+</script>

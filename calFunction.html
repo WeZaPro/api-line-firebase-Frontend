@@ -1,0 +1,110 @@
+<html>
+  <head></head>
+  </body>
+
+  <p style="font-size: 14px; color: black"  id="userId"><b>userId:</b> </p>
+  <p style="font-size: 14px; color: black"  id="displayName"><b>displayName:</b> </p>
+  <p style="font-size: 14px; color: black"  id="decodedIDToken"><b>email:</b> </p>
+  <p style="font-size: 14px; color: black"  id="os"><b>os:</b> </p>
+
+  <img id="pictureUrl">
+  <button id="btnLogIn" onclick="logIn()">Log In</button>
+  <button id="btnLogOut" onclick="logOut()">Log Out</button>
+  <button id="btnSaveFirebase" onclick="SaveToFirebase()">Save Firebase</button>
+
+  <button onclick="getData(`ทดสอบ CALL FUNCTION`)">CALL FUNCTION GET</button>
+  <button onclick="postData(`Laddawan`)">CALL FUNCTION POST</button>
+
+<p id="demo"></p>
+
+<script src="https://static.line-scdn.net/liff/edge/versions/2.3.0/sdk.js"></script>
+  </body>
+</html>
+
+<script>
+
+
+
+// Line
+async function main() {
+
+await liff.init({ liffId: "1657351076-xoZKjJqe" })
+if (liff.isLoggedIn()) {
+  alert("คุณได้ทำการ LogIn แล้ว กรุณาเลือก PACKAGE ที่ต้องการแชร์อีกครั้ง")
+
+  getUserProfile()
+
+} else {
+  alert("กรุณา LogIn ก่อน")
+  liff.login({ redirectUri :`https://www.onlinesabuyme.co.th/Sm_packageShare`})   
+ 
+}
+async function getUserProfile() {
+      const profile = await liff.getProfile()
+      document.getElementById("pictureUrl").style.display = "block"
+      document.getElementById("pictureUrl").src = profile.pictureUrl
+      document.getElementById("userId").append(profile.userId)
+      document.getElementById("displayName").append(profile.displayName)
+      document.getElementById("decodedIDToken").append(liff.getDecodedIDToken().email)
+      document.getElementById("os").append(liff.getOS())
+      
+    }
+}
+
+main()
+
+
+
+function sendLineHeroku() {
+    fetch("https://node-line-api.herokuapp.com/line/001").then(res => {
+        console.log("log");
+        return res.text()
+    }).then(text => {
+        alert(text)
+    })
+};
+
+function sendLineHerokuParam(b) {
+    $params = b
+    fetch(`https://node-line-api.herokuapp.com/line/`+$params).then(res => {
+        console.log("log"+$params);
+        return res.text()
+    }).then(text => {
+        alert(text)
+    })
+};
+
+// Get data
+function getData() {
+
+    fetch('https://api-line-firebase.herokuapp.com/api/get/')
+            .then((response) => response.json())
+            .then((data) => console.log(data));
+};
+
+// Post data
+function postData(x) {
+
+    const data = { fullname: x };
+
+fetch('https://api-line-firebase.herokuapp.com/api/create', {
+  method: 'POST', // or 'PUT'
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify(data),
+})
+  .then((response) => response.json())
+  .then((data) => { console.log('Success:', data);})
+  .catch((error) => {
+   console.error('Error:', error);
+});
+  
+
+
+};
+
+
+
+
+</script>

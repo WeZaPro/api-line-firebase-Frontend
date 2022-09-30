@@ -1,0 +1,100 @@
+<html>
+  <head></head>
+  </body>
+    <button onclick="myFunction()">Click me</button>
+    <button onclick="sendLine()">Send Line</button>
+     <button onclick="sendLineId(`ทดสอบส่งข้อมูล-LocalHost`)">Send Line ID</button>
+     <button onclick="sendLineHeroku()">Send Line Heroku</button>
+     <button onclick="sendLineHerokuParam(`ทดสอบส่งข้อมูล-Hosting`)">sendLineHerokuParam</button>
+
+     <button onclick="testAPI(`ทดสอบ CALL FUNCTION`)">CALL FUNCTION</button>
+
+<p id="demo"></p>
+<script src="javascript.js"></script>
+  </body>
+</html>
+
+<script>
+function myFunction() {
+    fetch("http://localhost:9000/text").then(res => {
+        console.log("log");
+        return res.text()
+    }).then(text => {
+        alert(text)
+    })
+};
+
+function sendLine() {
+    fetch("http://localhost:9000/line").then(res => {
+        console.log("log");
+        return res.text()
+    }).then(text => {
+        alert(text)
+    })
+};
+
+
+// function sendLineId(a) {
+//     fetch("http://localhost:9000/line/?a").then(res => {
+//         console.log("log" + a);
+//         return res.text()
+//     }).then(text => {
+//         alert(text)
+//     })
+// };
+
+function sendLineId(b) {
+    $params = b
+    fetch(`http://localhost:9000/line/`+$params).then(res => {
+        console.log("log" + a);
+        return res.text()
+    }).then(text => {
+        alert(text)
+    })
+};
+
+function sendLineHeroku() {
+    fetch("https://node-line-api.herokuapp.com/line/001").then(res => {
+        console.log("log");
+        return res.text()
+    }).then(text => {
+        alert(text)
+    })
+};
+
+function sendLineHerokuParam(b) {
+    $params = b
+    fetch(`https://node-line-api.herokuapp.com/line/`+$params).then(res => {
+        console.log("log"+$params);
+        return res.text()
+    }).then(text => {
+        alert(text)
+    })
+};
+
+// Write data
+function testAPI(data) {
+    
+    fetch(`http://localhost:3001/api/create/`).then(res => {
+        console.log("log--->"+data);
+        return res.text()
+    }).then(text => {
+        alert(text)
+    })
+};
+
+// Get data
+function testAPI() {
+    
+    fetch(`http://localhost:3001/api/get/`).then(res => {
+        console.log("log--->");
+        return res.text()
+    }).then(text => {
+        alert(text)
+    })
+};
+
+
+
+
+</script>
