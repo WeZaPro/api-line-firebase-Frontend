@@ -17,7 +17,7 @@
   <button id="btnSaveFirebase" onclick="SaveToFirebase()">Save Firebase</button>
 
   <button onclick="getData(`ทดสอบ CALL FUNCTION`)">CALL FUNCTION GET</button>
-  <button onclick="postData(`Laddawan`)">CALL FUNCTION POST</button>
+  <button onclick="postData()">CALL FUNCTION POST</button>
 
 <p id="demo"></p>
 
@@ -87,9 +87,9 @@ function getData() {
 };
 
 // Post data
-async function postData(x) {
+async function postData() {
   // get line userid
-  const profile = await liff.getProfile() 
+const profile = await liff.getProfile() 
 
 const data = { userId: profile.userId,
   diaplayName: profile.diaplayName,
