@@ -91,7 +91,10 @@ async function postData(x) {
   // get line userid
   const profile = await liff.getProfile() 
 
-const data = { userId: profile.userId };
+const data = { userId: profile.userId,
+  diaplayName: profile.diaplayName,
+  pictureUrl: profile.pictureUrl,
+  email: profile.email};
 
 fetch('https://api-line-firebase.herokuapp.com/api/create', {
   method: 'POST', // or 'PUT'
